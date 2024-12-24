@@ -1,0 +1,64 @@
+@startuml
+
+' =========================
+'    Classes & Attributes
+' =========================
+
+class Employee {
+  - id : int
+  - role : String
+  - projectHistory : List<Project>
+}
+
+class Report {
+  - id : int
+  - type : String
+  - format : String
+}
+
+class Calendar {
+  - events : List<String>
+}
+
+class KanbanBoard {
+  - columns : List<String>
+  - tasks : List<Task>
+}
+
+class Project {
+  - id : int
+  - name : String
+  - deadline : Date
+  - tasks : List<Task>
+  - members : List<Employee>
+}
+
+class Task {
+  - id : int
+  - title : String
+  - description : String
+  - status : String
+  - priority : String
+  - assignedMembers : Employee
+}
+
+' =========================
+'    Relationships
+' =========================
+
+' An Employee has a history of Projects
+Employee --> "0..*" Project : has projectHistory
+
+' A Project contains multiple Tasks
+Project --> "0..*" Task : tasks
+
+' A Project also has multiple members (Employees)
+Project --> "0..*" Employee : members
+
+' A Task is (currently) assigned to one Employee
+Task --> "1" Employee : assignedMembers
+
+' A KanbanBoard keeps a list of Tasks
+KanbanBoard --> "0..*" Task : tasks
+
+@enduml

@@ -1,0 +1,137 @@
+@startuml
+
+' =========================
+'      Enumerations
+' =========================
+enum Status {
+  TO_DO
+  IN_PROGRESS
+  DONE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+' =========================
+'      Main Classes
+' =========================
+
+class Employee {
+  - id : int
+  - role : String
+  - projectHistory : List<Project>
+
+  --
+  + Employee(id:int, role:String)
+  + getId() : int
+  + setId(id:int) : void
+  + getRole() : String
+  + setRole(role:String) : void
+  + getProjectHistory() : List<Project>
+  + addProjectToHistory(p:Project) : void
+  + removeProjectFromHistory(p:Project) : void
+}
+
+class Project {
+  - id : int
+  - name : String
+  - deadline : LocalDate
+  - tasks : List<Task>
+  - members : List<Employee>
+
+  --
+  + Project(id:int, name:String, deadline:LocalDate)
+  + getId() : int
+  + setId(id:int) : void
+  + getName() : String
+  + setName(name:String) : void
+  + getDeadline() : LocalDate
+  + setDeadline(deadline:LocalDate) : void
+  + getTasks() : List<Task>
+  + addTask(t:Task) : void
+  + removeTask(t:Task) : void
+  + getMembers() : List<Employee>
+  + addMember(e:Employee) : void
+  + removeMember(e:Employee) : void
+}
+
+class Task {
+  - id : int
+  - title : String
+  - description : String
+  - status : Status
+  - priority : Priority
+  - assignedMembers : List<Employee>
+
+  --
+  + Task(id:int, title:String, description:String, status:Status, priority:Priority)
+  + getId() : int
+  + setId(id:int) : void
+  + getTitle() : String
+  + setTitle(title:String) : void
+  + getDescription() : String
+  + setDescription(desc:String) : void
+  + getStatus() : Status
+  + setStatus(status:Status) : void
+  + getPriority() : Priority
+  + setPriority(priority:Priority) : void
+  + getAssignedMembers() : List<Employee>
+  + addAssignedMember(e:Employee) : void
+  + removeAssignedMember(e:Employee) : void
+}
+
+class KanbanBoard {
+  - columns : List<String>
+  - tasks : List<Task>
+
+  --
+  + KanbanBoard()
+  + getColumns() : List<String>
+  + addColumn(column:String) : void
+  + removeColumn(column:String) : void
+  + getTasks() : List<Task>
+  + addTask(t:Task) : void
+  + removeTask(t:Task) : void
+}
+
+class Calendar {
+  - events : List<String>
+
+  --
+  + Calendar()
+  + getEvents() : List<String>
+  + addEvent(event:String) : void
+  + removeEvent(event:String) : void
+}
+
+class Report {
+  - id : int
+  - type : String
+  - format : String
+
+  --
+  + Report(id:int, type:String, format:String)
+  + getId() : int
+  + setId(id:int) : void
+  + getType() : String
+  + setType(type:String) : void
+  + getFormat() : String
+  + setFormat(format:String) : void
+}
+
+' =========================
+'     Relationships
+' =========================
+
+Employee "1" --> "0..*" Project : projectHistory
+Project "1" --> "0..*" Task : tasks
+Project "1" --> "0..*" Employee : members
+Task "1" --> "0..*" Employee : assignedMembers
+KanbanBoard "1" --> "0..*" Task : tasks
+Calendar "0..*" --> "0..*" Project : schedules
+Report "1" --> "1" Project : forProject
+
+@enduml
