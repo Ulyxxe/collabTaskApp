@@ -34,10 +34,15 @@ public class Employee {
     public List<Project> getProjectHistory() {
         return projectHistory;
     }
+
     public void addProjectToHistory(Project project) {
         if (!projectHistory.contains(project)) {
             projectHistory.add(project);
         }
+    }
+
+    public void removeProjectFromHistory(Project project) {
+        projectHistory.remove(project);
     }
 
 }
