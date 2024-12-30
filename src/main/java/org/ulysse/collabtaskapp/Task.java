@@ -67,4 +67,14 @@ public class Task {
         return assignedMembers;
     }
 
+    public void addAssignedMember(Employee employee) {
+        if (!assignedMembers.contains(employee)) {
+            assignedMembers.add(employee);
+        }
+    }
+
+    public void removeAssignedMember(Employee employee) {
+        assignedMembers.remove(employee);
+    }
+
 }
