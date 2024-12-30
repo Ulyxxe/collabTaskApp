@@ -46,5 +46,25 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public List<Employee> getAssignedMembers() {
+        return assignedMembers;
+    }
+
 }
