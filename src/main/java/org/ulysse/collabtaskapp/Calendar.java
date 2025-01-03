@@ -14,5 +14,14 @@ public class Calendar {
     public List<String> getEvents() {
         return events;
     }
-    
+    public void addEvent(String event) {
+        if (!events.contains(event)) {
+            events.add(event);
+        }
+    }
+    public void removeEvent(String event) {
+        events.remove(event);
+    }
+
+
 }
