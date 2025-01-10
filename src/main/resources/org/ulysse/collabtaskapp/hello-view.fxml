@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ulysse.collabtaskapp.HelloController">
    <top>
       <HBox prefHeight="43.0" prefWidth="914.0" BorderPane.alignment="CENTER">
          <children>
@@ -31,7 +31,7 @@
    <left>
       <VBox prefHeight="568.0" prefWidth="233.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="54.0" prefWidth="234.0" text="Menu">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#home" prefHeight="54.0" prefWidth="234.0" text="Menu">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   <Font name="Cambria Math" size="17.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="234.0" text="Personal Management">
+            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#PersonalManagement" prefHeight="54.0" prefWidth="234.0" text="Personal Management">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -55,7 +55,7 @@
                   <Font name="Cambria Math" size="17.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="234.0" text="Calendar">
+            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" onMouseClicked="#Calendar" prefHeight="54.0" prefWidth="234.0" text="Calendar">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +67,7 @@
                   <Font name="Cambria Math" size="17.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="141.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="234.0" text="KanBan Board">
+            <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="141.0" mnemonicParsing="false" onMouseClicked="#KanbanBoard" prefHeight="52.0" prefWidth="234.0" text="KanBan Board">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
