@@ -12,10 +12,10 @@ public class Task {
     private String title;
     private String description;
     private Status status;
-    private Priority priority;
+    private org.ulysse.collabtaskapp.Priority priority;
     private List<Employee> assignedMembers;
 
-    public Task(int id, String title, String description, Status status, Priority priority){
+    public Task(int id, String title, String description, Status status, org.ulysse.collabtaskapp.Priority priority){
         this.id = id;
         this.title = title;
         this.description = description;
