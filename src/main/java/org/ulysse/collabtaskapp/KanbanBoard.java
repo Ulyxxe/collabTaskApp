@@ -7,9 +7,9 @@ public class KanbanBoard {
 
     public KanbanBoard() {}
 
-    public List<String> getColumns(
-            return
-    )
+    public List<String> getColumns() {
+        return columns;
+    }
 
 }
 
