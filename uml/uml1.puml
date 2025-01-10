@@ -1,5 +1,4 @@
 @startuml
-
 ' =========================
 '      Enumerations
 ' =========================
@@ -41,6 +40,8 @@ class Project {
   - deadline : LocalDate
   - tasks : List<Task>
   - members : List<Employee>
+  - isTeamLeader : Boolean
+
 
   --
   + Project(id:int, name:String, deadline:LocalDate)
@@ -56,6 +57,8 @@ class Project {
   + getMembers() : List<Employee>
   + addMember(e:Employee) : void
   + removeMember(e:Employee) : void
+  + getIsTeamLeader : Boolean
+  + setIsTeamLeader(isTeamLeader:Boolean) : void
 }
 
 class Task {
@@ -126,12 +129,11 @@ class Report {
 '     Relationships
 ' =========================
 
-Employee "1" --> "0..*" Project : projectHistory
-Project "1" --> "0..*" Task : tasks
-Project "1" --> "0..*" Employee : members
-Task "1" --> "0..*" Employee : assignedMembers
-KanbanBoard "1" --> "0..*" Task : tasks
-Calendar "0..*" --> "0..*" Project : schedules
-Report "1" --> "1" Project : forProject
-
+Employee "1" ..> "0..*" Project : projectHistory
+Project *-- Task : tasks
+Project "1" ..> "0..*" Employee : members
+Task "1" ..> "0..*" Employee : assignedMembers
+KanbanBoard "1" --* "0..*" Task : tasks
+Calendar "0..*" --* "0..*" Project : schedules
+Report "1" --* "1" Project : forProject
 @enduml
