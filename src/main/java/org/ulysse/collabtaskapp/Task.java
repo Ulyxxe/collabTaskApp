@@ -1,8 +1,6 @@
-
 package org.ulysse.collabtaskapp;
 
-import javafx.scene.layout.Priority;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,60 +10,79 @@ public class Task {
     private String title;
     private String description;
     private Status status;
-    private org.ulysse.collabtaskapp.Priority priority;
+    private Priority priority;
+    private LocalDate dueDate;
+    private String category;
+    private List<String> comments;
     private List<Employee> assignedMembers;
 
-    public Task(int id, String title, String description, Status status, org.ulysse.collabtaskapp.Priority priority){
+    public Task(int id, String title, String description, Status status, Priority priority, LocalDate dueDate, String category) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
         this.priority = priority;
+        this.dueDate = dueDate;
+        this.category = category;
+        this.comments = new ArrayList<>();
         this.assignedMembers = new ArrayList<>();
     }
 
     public int getId() {
-        return id;
-    }
+        return id; }
 
     public void setId(int id) {
-        this.id = id;
-    }
+        this.id = id; }
 
     public String getTitle() {
-        return title;
-    }
+        return title; }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
+        this.title = title; }
 
     public String getDescription() {
-        return description;
-    }
+        return description; }
 
     public void setDescription(String description) {
-        this.description = description;
-    }
+        this.description = description; }
 
     public Status getStatus() {
-        return status;
-    }
+        return status; }
 
     public void setStatus(Status status) {
-        this.status = status;
-    }
+        this.status = status; }
 
     public Priority getPriority() {
-        return priority;
-    }
+        return priority; }
 
     public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
+        this.priority = priority; }
+
+    public LocalDate getDueDate() {
+        return dueDate; }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate; }
+
+    public String getCategory() {
+        return category; }
+
+    public void setCategory(String category) {
+        this.category = category; }
+
+    public List<String> getComments() {
+        return comments; }
 
     public List<Employee> getAssignedMembers() {
-        return assignedMembers;
+        return assignedMembers; }
+
+
+    public void addComment(String comment) {
+        this.comments.add(comment);
+    }
+
+    public void removeComment(String comment) {
+        this.comments.remove(comment);
     }
 
     public void addAssignedMember(Employee employee) {
@@ -77,5 +94,4 @@ public class Task {
     public void removeAssignedMember(Employee employee) {
         assignedMembers.remove(employee);
     }
-
 }
