@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ulysse.collabtaskapp.HelloController">
+    <top>
+        <HBox prefHeight="43.0" prefWidth="914.0" BorderPane.alignment="CENTER">
+            <children>
+                <Text layoutX="284.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Collaborative Application" wrappingWidth="344.53668212890625">
+                    <font>
+                        <Font size="28.0" />
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="568.0" prefWidth="233.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button text="Calendar" onAction="#onCalendarClick" prefHeight="54.0" prefWidth="234.0" />
+                <Button text="Personal Management" onAction="#onPersonalManagementClick" prefHeight="54.0" prefWidth="234.0" />
+                <Button text="Kanban Board" onAction="#onKanbanBoardClick" prefHeight="54.0" prefWidth="234.0" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="568.0" prefWidth="680.0" />
+    </center>
+</BorderPane>
