@@ -30,6 +30,7 @@
                 <Button text="Calendar" onAction="#onCalendarClick" prefHeight="54.0" prefWidth="234.0" />
                 <Button text="Personal Management" onAction="#onPersonalManagementClick" prefHeight="54.0" prefWidth="234.0" />
                 <Button text="Kanban Board" onAction="#onKanbanBoardClick" prefHeight="54.0" prefWidth="234.0" />
+                <Button text="Quit" onAction="#onQuitClick" prefHeight="54.0" prefWidth="234.0" />
             </children>
         </VBox>
     </left>

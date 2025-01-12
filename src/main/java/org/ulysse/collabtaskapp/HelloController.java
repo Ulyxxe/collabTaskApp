@@ -1,5 +1,6 @@
 package org.ulysse.collabtaskapp;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -24,8 +25,14 @@ public class HelloController {
         addTab("Kanban Board");
     }
 
+    @FXML
+    protected void onQuitClick() {
+
+        Platform.exit();
+    }
+
     private void addTab(String tabName) {
-        // Check if a tab with the same name already exists
+
         for (Tab tab : tabPane.getTabs()) {
             if (tab.getText().equals(tabName)) {
                 tabPane.getSelectionModel().select(tab);
@@ -33,9 +40,8 @@ public class HelloController {
             }
         }
 
-        // Create a new tab
         Tab newTab = new Tab(tabName);
-        newTab.setClosable(true); // Allow closing the tab
+        newTab.setClosable(true);
         tabPane.getTabs().add(newTab);
         tabPane.getSelectionModel().select(newTab);
     }
