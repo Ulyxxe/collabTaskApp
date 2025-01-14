@@ -73,13 +73,13 @@ public class Project {
     public void addMember(Employee employee) {
         if (employee != null) {
             members.add(employee);
-            System.out.println("Member added to project: "+ employee.getId());
+            System.out.println("Member added to project: "+ employee.getName());
         }
     }
 
     public void removeMember(Employee employee) {
         if (members.remove(employee)) {
-            System.out.println("Member removed from project: " + employee.getId());
+            System.out.println("Member removed from project: " + employee.getName());
         } else {
             System.out.println("Member not found in project");
         }
@@ -101,5 +101,13 @@ public class Project {
             }
         }
         return filteredTasks;
+    }
+    public void listMembers() {
+        if (members.isEmpty()) {
+            System.out.println("No members in the project: " + name);
+        } else {
+            System.out.println("Members of the project: " + name);
+            members.forEach(member -> System.out.println(" - " + member.getName() + " (" + member.getRole() + ")"));
+        }
     }
 }
