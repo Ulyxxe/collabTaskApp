@@ -27,7 +27,7 @@ public class KanbanBoard {
 
 
     public boolean moveTask(Task task, Status newStatus) {
-        if (task != null || newStatus == null) return false;
+        if (task == null || newStatus == null) return false;
 
         switch (task.getStatus()) {
             case TO_DO -> toDo.remove(task);
