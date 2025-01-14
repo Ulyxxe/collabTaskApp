@@ -48,6 +48,7 @@ public class HelloController {
         newTab.setClosable(true);
         if ("Kanban Board".equals(tabName)) {
             try {
+                // Load the KanbanBoard.fxml file
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("KanbanBoard.fxml"));
                 Parent kanbanBoardView = loader.load();
                 newTab.setContent(kanbanBoardView);
