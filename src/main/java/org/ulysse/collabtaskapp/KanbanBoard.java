@@ -12,6 +12,7 @@ public class KanbanBoard {
         this.inProgress = new ArrayList<>();
         this.done = new ArrayList<>();
     }
+
     public void addTask(Task task) {
         if (task == null) return;
 
@@ -20,10 +21,10 @@ public class KanbanBoard {
             case TO_DO -> toDo.add(task);
             case IN_PROGRESS -> inProgress.add(task);
             case DONE -> done.add(task);
-            }
-        System.out.println("Task added: " + task.getTitle() + " [" + task.getStatus() + "]");
         }
+        System.out.println("Task added: " + task.getTitle() + " [" + task.getStatus() + "]");
     }
+
 
     public boolean moveTask(Task task, Status newStatus) {
         if (task != null || newStatus == null) return false;
@@ -33,24 +34,19 @@ public class KanbanBoard {
             case IN_PROGRESS -> inProgress.remove(task);
             case DONE -> done.remove(task);
         }
-        return false;
+        task.setStatus(newStatus);
+        addTask(task);
+        return true;
     }
 
-    private void addToColumn(Task task, String targetColumn) {
-        switch (targetColumn.toLowerCase()) {
-            case "todo":
-                toDo.add(task);
-                break;
-            case "inprogress":
-                inProgress.add(task);
-                break;
-            case "done":
-                done.add(task);
-                break;
-            default:
-                System.out.println("Invalid column specified");
-        }
-    }
+    public void listAllTasks() {
+        System.out.println("To-Do:");
+        toDo.forEach(task -> System.out.println(" - " + task.getTitle()));
 
+        System.out.println("In Progress:");
+        inProgress.forEach(task -> System.out.println(" - " + task.getTitle()));
+
+        System.out.println("Done:");
+        done.forEach(task -> System.out.println(" - " + task.getTitle()));
+    }
 }
-
