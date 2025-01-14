@@ -84,7 +84,15 @@ public class Project {
             System.out.println("Member not found in project");
         }
     }
+    public double getCompletionPercentage() {
+        if (tasks.isEmpty()) return 0.0;
 
+        long completedTasks = tasks.stream()
+                .filter(task -> task.getStatus() == Status.DONE)
+                .count();
+
+        return (completedTasks * 100.0) / tasks.size();
+    }
     public List<Task> getTasksByStatus(Status status) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
