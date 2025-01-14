@@ -2,8 +2,12 @@ package org.ulysse.collabtaskapp;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -42,6 +46,16 @@ public class HelloController {
 
         Tab newTab = new Tab(tabName);
         newTab.setClosable(true);
+        if ("Kanban Board".equals(tabName)) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("KanbanBoard.fxml"));
+                Parent kanbanBoardView = loader.load();
+                newTab.setContent(kanbanBoardView);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Error loading KanbanBoard.fxml: " + e.getMessage());
+            }
+        }
         tabPane.getTabs().add(newTab);
         tabPane.getSelectionModel().select(newTab);
     }
