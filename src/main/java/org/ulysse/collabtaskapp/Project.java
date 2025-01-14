@@ -54,22 +54,44 @@ public class Project {
     public void addTask(Task task) {
         if (!tasks.contains(task)) {
             tasks.add(task);
+            System.out.println("Task added: " + task.getTitle());
+
         }
+    }
+    public boolean isOverdue() {
+        return LocalDate.now().isAfter(deadline);
     }
 
     public void removeTask(Task task) {
-        tasks.remove(task);
+        if (tasks.remove(task)) {
+            System.out.println("Task removed from project: " + task.getTitle());
+        } else {
+            System.out.println("Task not found in project");
+        }
     }
 
     public void addMember(Employee employee) {
-        if (!members.contains(employee)) {
+        if (employee != null) {
             members.add(employee);
+            System.out.println("Member added to project: "+ employee.getId());
         }
     }
 
     public void removeMember(Employee employee) {
-        members.remove(employee);
+        if (members.remove(employee)) {
+            System.out.println("Member removed from project: " + employee.getId());
+        } else {
+            System.out.println("Member not found in project");
+        }
     }
 
-
+    public List<Task> getTasksByStatus(Status status) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getStatus() == status) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }
