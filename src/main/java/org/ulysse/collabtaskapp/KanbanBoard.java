@@ -7,28 +7,31 @@ public class KanbanBoard {
     private List<Task> inProgress;
     private List<Task> done;
 
-    public KanbanBoard() {}
+    public KanbanBoard() {
+        this.toDo = new ArrayList<>();
+        this.inProgress = new ArrayList<>();
+        this.done = new ArrayList<>();
+    }
+    public void addTask(Task task) {
+        if (task == null) return;
 
-    public List<String> addTaskToDo(Task task) {
-        if (task != null) {
-            toDo.add(task);
-            System.out.println("Task added: " + task.getTitle());
-        };
+        Status TODO;
+        switch (task.getStatus()) {
+            case TO_DO -> toDo.add(task);
+            case IN_PROGRESS -> inProgress.add(task);
+            case DONE -> done.add(task);
+            }
+        System.out.println("Task added: " + task.getTitle() + " [" + task.getStatus() + "]");
+        }
     }
 
-    public boolean moveTask(Task task, String targetColumn) {
-        if (task != null || targetColumn == null) {
-            return false;
-        }
-        if (toDo.remove(task)){
-            addToColumn(task, targetColumn);
-            return true;
-        } else if (inProgress.remove(task)) {
-            addToColumn(task, targetColumn);
-            return true;
-        } else if (done.remove(task)) {
-            addToColumn(task, targetColumn);
-            return true;
+    public boolean moveTask(Task task, Status newStatus) {
+        if (task != null || newStatus == null) return false;
+
+        switch (task.getStatus()) {
+            case TO_DO -> toDo.remove(task);
+            case IN_PROGRESS -> inProgress.remove(task);
+            case DONE -> done.remove(task);
         }
         return false;
     }
