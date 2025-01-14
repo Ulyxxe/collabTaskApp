@@ -21,7 +21,13 @@ public class Employee {
     public int getId() {
         return id;
     }
+public String getName() {
+        return name;
+}
 
+public void setName(String name) {
+        this.name = name;
+}
     public void setId(int id) {
         this.id = id;
     }
@@ -39,13 +45,25 @@ public class Employee {
     }
 
     public void addProjectToHistory(Project project) {
-        if (!projectHistory.contains(project)) {
+        if (project != null && !projectHistory.contains(project)) {
             projectHistory.add(project);
+            System.out.println("Project added to history for employee " + name);
         }
     }
 
     public void removeProjectFromHistory(Project project) {
-        projectHistory.remove(project);
+        if (projectHistory.remove(project)) {
+            System.out.println("Project removed from history for employee " + name);
+        } else {
+            System.out.println("Project not removed from history for employee " + name);
+        }
     }
-
+    public void listProjectHistory() {
+        if (projectHistory.isEmpty()) {
+            System.out.println("No projects in history for employee: " + name);
+        } else {
+            System.out.println("Project history for employee: " + name);
+            projectHistory.forEach(project -> System.out.println(" - " + project.getName()));
+        }
+    }
 }
