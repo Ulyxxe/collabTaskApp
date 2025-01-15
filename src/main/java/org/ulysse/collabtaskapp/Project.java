@@ -17,6 +17,7 @@ public class Project {
         this.deadline = deadline;
         this.tasks = new ArrayList<>();
         this.members = new ArrayList<>();
+
     }
 
     public int getId() {
