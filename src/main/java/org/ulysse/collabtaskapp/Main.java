@@ -1,6 +1,10 @@
 package org.ulysse.collabtaskapp;
 
+import org.ulysse.collabtaskapp.db.TaskDAO;
+
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
 
@@ -30,5 +34,15 @@ public class Main {
 
         kanbanBoard.moveTask(task1, Status.IN_PROGRESS);
         kanbanBoard.listAllTasks();
+
+        TaskDAO taskDAO = new TaskDAO();
+
+        // Add a new task
+        taskDAO.addTask("Finish project", "Complete the final report", Date.valueOf("2025-01-20"), "TODO");
+
+        // Retrieve and display all tasks
+        List<String> tasks = taskDAO.getAllTasks();
+        for (String task : tasks) {
+            System.out.println("Task: " + task);
     }
-}
+}}
