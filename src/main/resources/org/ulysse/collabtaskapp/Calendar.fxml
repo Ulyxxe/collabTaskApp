@@ -3,13 +3,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
 
-<HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ulysse.collabtaskapp.CalendarController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Calendar" wrappingWidth="72.53670310974121">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <VBox spacing="10" alignment="CENTER">
+         <!-- Calendar Label -->
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Date" wrappingWidth="150.0">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+
+         <!-- DatePicker -->
+         <DatePicker fx:id="datePicker" onAction="#handleDateSelection" />
+
+         <!-- List of Projects Assigned to the Selected Date -->
+         <Label text="Assigned Projects:" />
+         <ListView fx:id="projectsListView" prefHeight="150.0" prefWidth="200.0" />
+      </VBox>
    </children>
 </HBox>

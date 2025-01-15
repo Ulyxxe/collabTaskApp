@@ -30,9 +30,16 @@ public class KanbanBoardController {
     private DatePicker taskDueDateField;
     @FXML
     private ComboBox<String> taskPriorityField;
+    private CalendarController calendarController;
 
     private List<Project> projects = new ArrayList<>(); // List to store projects
     private Project selectedProject; // Currently selected project
+
+    @FXML
+    private void initialize() {
+
+        calendarController = new CalendarController();
+    }
 
     @FXML
     private void handleCreateNewProject() {
@@ -94,6 +101,10 @@ public class KanbanBoardController {
             // Add the task to the selected project
             selectedProject.addTask(newTask);
 
+
+
+            calendarController.addProjectDueDate(taskDueDate, selectedProject.getName());
+
             // Refresh task list display
             displayTasksForProject();
 
@@ -113,7 +124,7 @@ public class KanbanBoardController {
 
         // List tasks in the To-Do column
         todoColumn.getChildren().clear();
-        for (Task task : selectedProject.getTasksByStatus(Status.DONE)) {
+        for (Task task : selectedProject.getTasksByStatus(Status.TO_DO)) {
             Label taskLabel = new Label(task.getTitle());
             todoColumn.getChildren().add(taskLabel);
         }
