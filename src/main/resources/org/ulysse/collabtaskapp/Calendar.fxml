@@ -20,7 +20,7 @@
 
          <!-- DatePicker -->
          <DatePicker fx:id="datePicker" onAction="#handleDateSelection" />
-         
+
 
          <!-- List of Projects Assigned to the Selected Date -->
          <Label text="Assigned Projects:" />

@@ -16,46 +16,31 @@ public class HelloController {
 
     @FXML
     protected void onCalendarClick() {
-        addTab("Calendar");
+        addTab("Calendar", "Calendar.fxml");
     }
 
     @FXML
     protected void onPersonalManagementClick() {
-        addTab("Personal Management");
+        addTab("Personal Management", "PersonalManagement.fxml");
     }
 
     @FXML
     protected void onKanbanBoardClick() {
+        addTab("Kanban Board", "KanbanBoard.fxml");
+    }
 
-        try {
-            // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("KanbanBoard.fxml"));
-            // Optional: Set the controller if it's not automatically found
-
-
-            // Load the FXML into a Parent node
-            Parent root = loader.load();
-
-            // Create a new tab to display the Kanban board
-            Tab kanbanTab = new Tab("Kanban Board");
-            kanbanTab.setContent(root);  // Set the loaded FXML as the content of the tab
-
-            // Assuming you're adding this tab to a TabPane
-            tabPane.getTabs().add(kanbanTab);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    protected void onReportClick() {
+        addTab("Report", "Report.fxml");
     }
 
     @FXML
     protected void onQuitClick() {
-
         Platform.exit();
     }
 
-    private void addTab(String tabName) {
-
+    private void addTab(String tabName, String fxmlFile) {
+        // Check if the tab already exists
         for (Tab tab : tabPane.getTabs()) {
             if (tab.getText().equals(tabName)) {
                 tabPane.getSelectionModel().select(tab);
@@ -63,9 +48,21 @@ public class HelloController {
             }
         }
 
-        Tab newTab = new Tab(tabName);
-        newTab.setClosable(true);
-        tabPane.getTabs().add(newTab);
-        tabPane.getSelectionModel().select(newTab);
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            // Create a new tab and set its content
+            Tab newTab = new Tab(tabName);
+            newTab.setContent(root);
+            newTab.setClosable(true);
+
+            // Add the tab to the TabPane
+            tabPane.getTabs().add(newTab);
+            tabPane.getSelectionModel().select(newTab);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
