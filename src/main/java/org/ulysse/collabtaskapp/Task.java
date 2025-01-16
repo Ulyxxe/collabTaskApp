@@ -12,7 +12,7 @@ public class Task {
     private Status status;
     private Priority priority;
     private LocalDate dueDate;
-    private String category;
+    //private String category;
     private List<String> comments;
     private List<Employee> assignedMembers;
 
@@ -23,7 +23,7 @@ public class Task {
         this.status = status;
         this.priority = priority;
         this.dueDate = dueDate;
-        this.category = category;
+        //this.category = category;
         this.comments = new ArrayList<>();
         this.assignedMembers = new ArrayList<>();
     }
@@ -64,11 +64,11 @@ public class Task {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate; }
 
-    public String getCategory() {
-        return category; }
+   // public String getCategory() {
+    //    return category; }
 
-    public void setCategory(String category) {
-        this.category = category; }
+   // public void setCategory(String category) {
+ //       this.category = category; }
 
     public List<String> getComments() {
         return comments; }
