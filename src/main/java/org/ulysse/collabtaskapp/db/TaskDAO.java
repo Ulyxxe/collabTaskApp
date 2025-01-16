@@ -29,15 +29,16 @@ public class TaskDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tasks;
+        System.out.println("Fetche d tasks for status " + status + ": " + tasks);
+        return tasks;;
     }
 
-    public void addTask(int id, String title, String description, Date deadline, String status, String priority) {
-        String query = "INSERT INTO tasks (id,title, description, deadline, status, priority) VALUES (?, ?, ?, ?, ?::task_status, ?:task_priority)";
+    public void addTask(String title, String description, Date deadline, String status, String priority) {
+        String query = "INSERT INTO tasks (title, description, deadline, status, priority) VALUES (?, ?, ?, ?::task_status, ?:task_priority)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+
             statement.setString(1, title);
             statement.setString(2, description);
             statement.setDate(3, deadline);
