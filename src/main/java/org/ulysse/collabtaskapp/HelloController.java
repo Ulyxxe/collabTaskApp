@@ -26,11 +26,11 @@ public class HelloController {
             Parent root = loader.load();
 
             // Create a new tab to display the Kanban board
-            Tab kanbanTab = new Tab("Kanban Board");
-            kanbanTab.setContent(root);  // Set the loaded FXML as the content of the tab
+            Tab calendarTab = new Tab("Calendar");
+            calendarTab.setContent(root);  // Set the loaded FXML as the content of the tab
 
             // Assuming you're adding this tab to a TabPane
-            tabPane.getTabs().add(kanbanTab);
+            tabPane.getTabs().add(calendarTab);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,19 +46,16 @@ public class HelloController {
     protected void onKanbanBoardClick() {
 
         try {
-            // Load the FXML file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("KanbanBoard.fxml"));
-            // Optional: Set the controller if it's not automatically found
 
-
-            // Load the FXML into a Parent node
             Parent root = loader.load();
 
-            // Create a new tab to display the Kanban board
-            Tab kanbanTab = new Tab("Kanban Board");
-            kanbanTab.setContent(root);  // Set the loaded FXML as the content of the tab
 
-            // Assuming you're adding this tab to a TabPane
+            Tab kanbanTab = new Tab("Kanban Board");
+            kanbanTab.setContent(root);
+
+
             tabPane.getTabs().add(kanbanTab);
 
         } catch (IOException e) {

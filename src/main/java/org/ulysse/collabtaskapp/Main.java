@@ -38,7 +38,7 @@ public class Main {
         TaskDAO taskDAO = new TaskDAO();
 
         // Add a new task
-        taskDAO.addTask("Finish project", "Complete the final report", Date.valueOf("2025-01-20"), "TODO");
+        taskDAO.addTask("Finish project", "Complete the final report", Date.valueOf("2025-01-20"), String.valueOf(Status.TO_DO), Priority.HIGH);
 
         // Retrieve and display all tasks
         List<String> tasks = taskDAO.getAllTasks();

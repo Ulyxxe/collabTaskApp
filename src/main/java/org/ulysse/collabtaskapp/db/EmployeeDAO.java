@@ -15,8 +15,8 @@ public class EmployeeDAO {
     private static final String PASSWORD = "Isep2025:!";
 
     // Add a new employee
-    public void addEmployee(String name, String role) {
-        String query = "INSERT INTO employees (name, role) VALUES (?, ?)";
+    public static void addEmployee(String name, String role) {
+        String query = "INSERT INTO employee (name, role) VALUES (?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -32,17 +32,17 @@ public class EmployeeDAO {
         }
     }
 
-    // Retrieve all employees
+
     public List<Employee> getAllEmployees() {
-        List<Employee> employees = new ArrayList<>();
-        String query = "SELECT * FROM employees";
+        List<Employee> employee = new ArrayList<>();
+        String query = "SELECT * FROM employee";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                employees.add(new Employee(
+                employee.add(new Employee(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("role")
@@ -52,13 +52,13 @@ public class EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employees;
+        return employee;
     }
 
     // Retrieve an employee by ID (with project history)
     public Employee getEmployeeById(int id) {
-        String employeeQuery = "SELECT * FROM employees WHERE id = ?";
-        String projectQuery = "SELECT p.id, p.name, p.deadline, " +
+        String employeeQuery = "SELECT * FROM employee WHERE id = ?";
+        String projectQuery = "SELECT p.id, p.name, p.deadline " +
                 "FROM projects p " +
                 "JOIN employee_projects ep ON p.id = ep.project_id " +
                 "WHERE ep.employee_id = ?";
@@ -103,7 +103,7 @@ public class EmployeeDAO {
 
     // Update an employee
     public void updateEmployee(int id, String name, String role) {
-        String query = "UPDATE employees SET name = ?, role = ? WHERE id = ?";
+        String query = "UPDATE employee SET name = ?, role = ? WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -122,7 +122,7 @@ public class EmployeeDAO {
 
     // Delete an employee
     public void deleteEmployee(int id) {
-        String query = "DELETE FROM employees WHERE id = ?";
+        String query = "DELETE FROM employee WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -138,17 +138,27 @@ public class EmployeeDAO {
 
     // Add a project to an employee's project history
     public void addProjectToEmployee(int employeeId, int projectId) {
-        String query = "INSERT INTO employee_projects (employee_id, project_id) VALUES (?, ?)";
+        String checkProjectQuery = "SELECT 1 FROM projects WHERE id = ?";
+        String insertQuery = "INSERT INTO employee_projects (employee_id, project_id) VALUES (?, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement checkStatement = connection.prepareStatement(checkProjectQuery);
+             PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
 
-            statement.setInt(1, employeeId);
-            statement.setInt(2, projectId);
+            // Check if the project exists
+            checkStatement.setInt(1, projectId);
+            ResultSet resultSet = checkStatement.executeQuery();
 
-            statement.executeUpdate();
-            System.out.println("Project added to employee's history!");
+            if (!resultSet.next()) {
+                System.out.println("Error: Project with ID " + projectId + " does not exist.");
+                return; // Exit without inserting
+            }
 
+            // Insert into employee_projects if the project exists
+            insertStatement.setInt(1, employeeId);
+            insertStatement.setInt(2, projectId);
+            insertStatement.executeUpdate();
+            System.out.println("Project successfully assigned to employee!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

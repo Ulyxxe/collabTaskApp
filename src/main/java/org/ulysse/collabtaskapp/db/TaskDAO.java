@@ -1,5 +1,6 @@
 package org.ulysse.collabtaskapp.db;
 
+import org.ulysse.collabtaskapp.Priority;
 import org.ulysse.collabtaskapp.Task;
 
 import java.sql.*;
@@ -29,11 +30,10 @@ public class TaskDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Fetche d tasks for status " + status + ": " + tasks);
-        return tasks;;
+        return tasks;
     }
 
-    public void addTask(String title, String description, Date deadline, String status, String priority) {
+    public void addTask(String title, String description, Date deadline, String status, Priority priority) {
         String query = "INSERT INTO tasks (title, description, deadline, status, priority) VALUES (?, ?, ?, ?::task_status, ?:task_priority)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -43,7 +43,7 @@ public class TaskDAO {
             statement.setString(2, description);
             statement.setDate(3, deadline);
             statement.setString(4, status);
-            statement.setString(5, priority);
+            statement.setString(5, priority.name());
 
             statement.executeUpdate();
             System.out.println("Task added successfully!");
@@ -68,7 +68,7 @@ public class TaskDAO {
                         resultSet.getString("description"),
                         resultSet.getDate("deadline"),
                         resultSet.getString("status"),
-                        resultSet.getString("priority")
+                        Priority.valueOf(resultSet.getString("priority"))
                 );
 
                 tasksByStatus.computeIfAbsent(status, k -> new ArrayList<>()).add(task);
@@ -79,7 +79,32 @@ public class TaskDAO {
         }
         return tasksByStatus;
     }
+    public List<Task> getTasksByStatus(String status) {
+        List<Task> tasks = new ArrayList<>();
+        String query = "SELECT * FROM tasks WHERE status = ?::task_status";
 
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, status);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                tasks.add(new Task(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getDate("deadline"),
+                        resultSet.getString("status"),
+                        Priority.valueOf(resultSet.getString("priority"))
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tasks;
+    }
 }
 
 

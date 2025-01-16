@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.ulysse.collabtaskapp.db.EmployeeDAO;
 public class DatabaseConnector {
 
     // Database URL, username, and password
@@ -21,6 +22,7 @@ public class DatabaseConnector {
             String query = "SELECT * FROM tasks";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
+
 
             while (resultSet.next()) {
                 System.out.println("Task: " + resultSet.getString("title"));

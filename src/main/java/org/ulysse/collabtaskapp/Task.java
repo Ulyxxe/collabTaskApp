@@ -29,7 +29,7 @@ public class Task {
         this.assignedMembers = new ArrayList<>();
     }
 
-    public Task(int id, String title, String description, Date deadline, String status, String priority) {
+    public Task(int id, String title, String description, Date deadline, String status, Priority priority) {
     }
 
     public int getId() {
