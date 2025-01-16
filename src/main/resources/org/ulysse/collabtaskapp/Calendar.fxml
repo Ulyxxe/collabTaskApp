@@ -20,8 +20,7 @@
 
          <!-- DatePicker -->
          <DatePicker fx:id="datePicker" onAction="#handleDateSelection" />
-         <Label text="Due Date:" GridPane.rowIndex="2"/>
-         <DatePicker fx:id="taskDueDateField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+         
 
          <!-- List of Projects Assigned to the Selected Date -->
          <Label text="Assigned Projects:" />
