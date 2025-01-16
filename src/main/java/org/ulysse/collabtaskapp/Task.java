@@ -1,5 +1,6 @@
 package org.ulysse.collabtaskapp;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Task {
     private Status status;
     private Priority priority;
     private LocalDate dueDate;
-    //private String category;
+    private String category;
     private List<String> comments;
     private List<Employee> assignedMembers;
 
@@ -26,6 +27,9 @@ public class Task {
         //this.category = category;
         this.comments = new ArrayList<>();
         this.assignedMembers = new ArrayList<>();
+    }
+
+    public Task(int id, String title, String description, Date deadline, String status, String priority) {
     }
 
     public int getId() {
@@ -64,11 +68,11 @@ public class Task {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate; }
 
-   // public String getCategory() {
-    //    return category; }
+   public String getCategory() {
+      return category; }
 
-   // public void setCategory(String category) {
- //       this.category = category; }
+   public void setCategory(String category) {
+     this.category = category; }
 
     public List<String> getComments() {
         return comments; }
