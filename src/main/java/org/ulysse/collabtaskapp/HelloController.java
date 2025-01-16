@@ -17,19 +17,18 @@ public class HelloController {
     @FXML
     protected void onCalendarClick() {
         try {
-            // Load the FXML file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Calendar.fxml"));
-            // Optional: Set the controller if it's not automatically found
 
 
-            // Load the FXML into a Parent node
+
             Parent root = loader.load();
 
-            // Create a new tab to display the Kanban board
-            Tab calendarTab = new Tab("Calendar");
-            calendarTab.setContent(root);  // Set the loaded FXML as the content of the tab
 
-            // Assuming you're adding this tab to a TabPane
+            Tab calendarTab = new Tab("Calendar");
+            calendarTab.setContent(root);
+
+
             tabPane.getTabs().add(calendarTab);
 
         } catch (IOException e) {

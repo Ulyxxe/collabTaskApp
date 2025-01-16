@@ -55,7 +55,7 @@ public class EmployeeDAO {
         return employee;
     }
 
-    // Retrieve an employee by ID (with project history)
+
     public Employee getEmployeeById(int id) {
         String employeeQuery = "SELECT * FROM employee WHERE id = ?";
         String projectQuery = "SELECT p.id, p.name, p.deadline " +
@@ -69,7 +69,7 @@ public class EmployeeDAO {
              PreparedStatement empStatement = connection.prepareStatement(employeeQuery);
              PreparedStatement projStatement = connection.prepareStatement(projectQuery)) {
 
-            // Fetch employee details
+
             empStatement.setInt(1, id);
             ResultSet empResult = empStatement.executeQuery();
 
@@ -80,7 +80,7 @@ public class EmployeeDAO {
                         empResult.getString("role")
                 );
 
-                // Fetch project history
+
                 projStatement.setInt(1, id);
                 ResultSet projResult = projStatement.executeQuery();
 
@@ -101,7 +101,7 @@ public class EmployeeDAO {
         return employee;
     }
 
-    // Update an employee
+
     public void updateEmployee(int id, String name, String role) {
         String query = "UPDATE employee SET name = ?, role = ? WHERE id = ?";
 
@@ -120,7 +120,7 @@ public class EmployeeDAO {
         }
     }
 
-    // Delete an employee
+
     public void deleteEmployee(int id) {
         String query = "DELETE FROM employee WHERE id = ?";
 
@@ -136,7 +136,7 @@ public class EmployeeDAO {
         }
     }
 
-    // Add a project to an employee's project history
+
     public void addProjectToEmployee(int employeeId, int projectId) {
         String checkProjectQuery = "SELECT 1 FROM projects WHERE id = ?";
         String insertQuery = "INSERT INTO employee_projects (employee_id, project_id) VALUES (?, ?)";
@@ -145,7 +145,7 @@ public class EmployeeDAO {
              PreparedStatement checkStatement = connection.prepareStatement(checkProjectQuery);
              PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
 
-            // Check if the project exists
+
             checkStatement.setInt(1, projectId);
             ResultSet resultSet = checkStatement.executeQuery();
 
@@ -154,7 +154,7 @@ public class EmployeeDAO {
                 return; // Exit without inserting
             }
 
-            // Insert into employee_projects if the project exists
+
             insertStatement.setInt(1, employeeId);
             insertStatement.setInt(2, projectId);
             insertStatement.executeUpdate();
@@ -164,7 +164,7 @@ public class EmployeeDAO {
         }
     }
 
-    // Remove a project from an employee's project history
+
     public void removeProjectFromEmployee(int employeeId, int projectId) {
         String query = "DELETE FROM employee_projects WHERE employee_id = ? AND project_id = ?";
 

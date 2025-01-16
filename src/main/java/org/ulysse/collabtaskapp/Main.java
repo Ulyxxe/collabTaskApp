@@ -13,8 +13,8 @@ public class Main {
         System.out.printf(projectStatus.toString());
         KanbanBoard kanbanBoard = new KanbanBoard();
         Project project1 = new Project(1, "Our collabTaskApp", LocalDate.of(2025, 2, 15));
-        Task task1 = new Task(1, "Design UI", "Create UI mockups", Status.TO_DO, Priority.HIGH, LocalDate.now().plusDays(7), "Design");
-        Task task2 = new Task(2, "Kanban Class","Finish the Kanban", Status.TO_DO, Priority.HIGH, LocalDate.now().plusDays(7), "Design");
+        Task task1 = new Task(1, "Design UI", "Create UI mockups", Status.TO_DO, Priority.HIGH, LocalDate.now().plusDays(7));
+        Task task2 = new Task(2, "Kanban Class","Finish the Kanban", Status.TO_DO, Priority.HIGH, LocalDate.now().plusDays(7));
         task2.setStatus(Status.IN_PROGRESS);
 
         project1.addTask(task1);
@@ -37,10 +37,10 @@ public class Main {
 
         TaskDAO taskDAO = new TaskDAO();
 
-        // Add a new task
-        taskDAO.addTask("Finish project", "Complete the final report", Date.valueOf("2025-01-20"), String.valueOf(Status.TO_DO), Priority.HIGH);
 
-        // Retrieve and display all tasks
+        taskDAO.addTask("Finish project", "Complete the final report", Date.valueOf("2025-01-20"), String.valueOf(Status.TO_DO), Priority.HIGH, 1);
+
+
         List<String> tasks = taskDAO.getAllTasks();
         for (String task : tasks) {
             System.out.println("Task: " + task);

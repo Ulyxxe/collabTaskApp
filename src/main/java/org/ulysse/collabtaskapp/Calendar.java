@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Calendar {
 
-    private List<String> events;
+    private final List<String> events;
 
     public Calendar(){
         this.events = new ArrayList<>();

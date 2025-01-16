@@ -33,8 +33,8 @@ public class TaskDAO {
         return tasks;
     }
 
-    public void addTask(String title, String description, Date deadline, String status, Priority priority) {
-        String query = "INSERT INTO tasks (title, description, deadline, status, priority) VALUES (?, ?, ?, ?::task_status, ?:task_priority)";
+    public void addTask(String title, String description, Date deadline, String status, Priority priority, int projectId) {
+        String query = "INSERT INTO tasks (title, description, deadline, status, priority, project_id) VALUES (?, ?, ?, ?::task_status, ?::task_priority, ?)";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -44,7 +44,7 @@ public class TaskDAO {
             statement.setDate(3, deadline);
             statement.setString(4, status);
             statement.setString(5, priority.name());
-
+            statement.setInt(6, projectId);
             statement.executeUpdate();
             System.out.println("Task added successfully!");
 
@@ -66,9 +66,9 @@ public class TaskDAO {
                         resultSet.getInt("id"),
                         resultSet.getString("title"),
                         resultSet.getString("description"),
-                        resultSet.getDate("deadline"),
                         resultSet.getString("status"),
-                        Priority.valueOf(resultSet.getString("priority"))
+                        Priority.valueOf(resultSet.getString("priority")),
+                        resultSet.getDate("deadline")
                 );
 
                 tasksByStatus.computeIfAbsent(status, k -> new ArrayList<>()).add(task);
@@ -91,19 +91,33 @@ public class TaskDAO {
 
             while (resultSet.next()) {
                 tasks.add(new Task(
-                        resultSet.getInt("id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getDate("deadline"),
+                                        resultSet.getInt("id"),
+                                        resultSet.getString("title"),
+                                        resultSet.getString("description"),
                         resultSet.getString("status"),
-                        Priority.valueOf(resultSet.getString("priority"))
-                ));
+                        Priority.valueOf(resultSet.getString("priority")),
+                        resultSet.getDate("deadline")
+                                ));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return tasks;
+    }
+    public void updateTaskStatus(String taskTitle, String newStatus) {
+        String query = "UPDATE tasks SET status = ?::task_status WHERE title = ?";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, newStatus);
+            statement.setString(2, taskTitle);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

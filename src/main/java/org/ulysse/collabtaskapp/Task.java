@@ -17,7 +17,7 @@ public class Task {
     private List<String> comments;
     private List<Employee> assignedMembers;
 
-    public Task(int id, String title, String description, Status status, Priority priority, LocalDate dueDate, String category) {
+    public Task(int id, String title, String description, Status status, Priority priority, LocalDate dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -29,8 +29,9 @@ public class Task {
         this.assignedMembers = new ArrayList<>();
     }
 
-    public Task(int id, String title, String description, Date deadline, String status, Priority priority) {
+    public Task(int id, String title, String description, String status, Priority priority, Date deadline) {
     }
+
 
     public int getId() {
         return id; }
