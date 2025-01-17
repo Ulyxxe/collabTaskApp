@@ -81,6 +81,7 @@ public class KanbanBoardController {
     @FXML
     private void handleAddTask() {
         if (selectedProject != null) {
+            System.out.println("here");
             // Get the task details from the input fields
             String taskTitle = taskTitleField.getText().trim();
             String taskDescription = taskDescriptionField.getText().trim();
@@ -120,27 +121,29 @@ public class KanbanBoardController {
 
     private void displayTasksForProject() {
         // Clear the existing task list
-        taskListContainer.getChildren().clear();
+        if(taskListContainer != null){
+            taskListContainer.getChildren().clear();
 
-        // List tasks in the To-Do column
-        todoColumn.getChildren().clear();
-        for (Task task : selectedProject.getTasksByStatus(Status.TO_DO)) {
-            Label taskLabel = new Label(task.getTitle());
-            todoColumn.getChildren().add(taskLabel);
-        }
+            // List tasks in the To-Do column
+            todoColumn.getChildren().clear();
+            for (Task task : selectedProject.getTasksByStatus(Status.TO_DO)) {
+                Label taskLabel = new Label(task.getTitle());
+                todoColumn.getChildren().add(taskLabel);
+            }
 
-        // List tasks in the In Progress column
-        inProgressColumn.getChildren().clear();
-        for (Task task : selectedProject.getTasksByStatus(Status.IN_PROGRESS)) {
-            Label taskLabel = new Label(task.getTitle());
-            inProgressColumn.getChildren().add(taskLabel);
-        }
+            // List tasks in the In Progress column
+            inProgressColumn.getChildren().clear();
+            for (Task task : selectedProject.getTasksByStatus(Status.IN_PROGRESS)) {
+                Label taskLabel = new Label(task.getTitle());
+                inProgressColumn.getChildren().add(taskLabel);
+            }
 
-        // List tasks in the Done column
-        doneColumn.getChildren().clear();
-        for (Task task : selectedProject.getTasksByStatus(Status.DONE)) {
-            Label taskLabel = new Label(task.getTitle());
-            doneColumn.getChildren().add(taskLabel);
+            // List tasks in the Done column
+            doneColumn.getChildren().clear();
+            for (Task task : selectedProject.getTasksByStatus(Status.DONE)) {
+                Label taskLabel = new Label(task.getTitle());
+                doneColumn.getChildren().add(taskLabel);
+            }
         }
 
         statusLabel.setText("Project: " + selectedProject.getName());
